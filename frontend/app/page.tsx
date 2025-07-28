@@ -552,7 +552,10 @@ export default function Home() {
                                       <span className="confidence-score">{option.confidence}%</span>
                                     </div>
                                     <div className="option-text product-name-option">{option.text}</div>
-                                    <div className="option-justification">{option.justification}</div>
+                                    <div className="option-justification">
+                                      <p><strong>Strategy:</strong> {option.angle}</p>
+                                      {option.justification}
+                                    </div>
                                   </div>
                                 ))}
                               </div>
@@ -570,7 +573,10 @@ export default function Home() {
                                         <span className="confidence-score">{option.confidence}%</span>
                                       </div>
                                       <div className="option-text tagline-option">{option.text}</div>
-                                      <div className="option-justification">{option.justification}</div>
+                                      <div className="option-justification">
+                                        <p><strong>Strategy:</strong> {option.angle}</p>
+                                        {option.justification}
+                                      </div>
                                     </div>
                                   ))}
                                 </div>
@@ -589,7 +595,10 @@ export default function Home() {
                                         <span className="confidence-score">{option.confidence}%</span>
                                       </div>
                                       <div className="option-text headline-option">{option.text}</div>
-                                      <div className="option-justification">{option.justification}</div>
+                                      <div className="option-justification">
+                                        <p><strong>Strategy:</strong> {option.angle}</p>
+                                        {option.justification}
+                                      </div>
                                     </div>
                                   ))}
                                 </div>
@@ -612,7 +621,10 @@ export default function Home() {
                                           <span key={j} className="claim-tag">{claim}</span>
                                         ))}
                                       </div>
-                                      <div className="option-justification">{variation.justification}</div>
+                                      <div className="option-justification">
+                                        <p><strong>Strategy:</strong> {variation.angle}</p>
+                                        {variation.justification}
+                                      </div>
                                     </div>
                                   ))}
                                 </div>
@@ -630,7 +642,10 @@ export default function Home() {
                                       <span className="confidence-score">{option.confidence}%</span>
                                     </div>
                                     <div className="option-text">{option.text}</div>
-                                    <div className="option-justification">{option.justification}</div>
+                                    <div className="option-justification">
+                                      <p><strong>Strategy:</strong> {option.angle}</p>
+                                      {option.justification}
+                                    </div>
                                   </div>
                                 ))}
                               </div>
@@ -666,7 +681,10 @@ export default function Home() {
                                         <span className="confidence-score">{option.confidence}%</span>
                                       </div>
                                       <div className="option-text">{option.text}</div>
-                                      <div className="option-justification">{option.justification}</div>
+                                      <div className="option-justification">
+                                        <p><strong>Strategy:</strong> {option.angle}</p>
+                                        {option.justification}
+                                      </div>
                                     </div>
                                   ))}
                                 </div>
@@ -685,7 +703,10 @@ export default function Home() {
                                         <span className="confidence-score">{option.confidence}%</span>
                                       </div>
                                       <div className="option-text cta-option">{option.text}</div>
-                                      <div className="option-justification">{option.justification}</div>
+                                      <div className="option-justification">
+                                        <p><strong>Strategy:</strong> {option.angle}</p>
+                                        {option.justification}
+                                      </div>
                                     </div>
                                   ))}
                                 </div>
