@@ -1,3 +1,6 @@
+ssh root@164.90.145.200
+ecomExperts@1214ecom
+
 # DigitalOcean Deployment Guide for Flask API
 
 This guide provides the necessary commands to deploy the Flask backend on a DigitalOcean droplet using uWSGI and Nginx.
@@ -144,18 +147,35 @@ Create an Nginx server block to route traffic to uWSGI.
 sudo nano /etc/nginx/sites-available/copywriter-api
 ```
 
-Paste the following. It is configured to run on your server's IP address.
-```nginx
+Paste the following, replacing `your-domain.com` with your domain or IP:
+*nginx*
 server {
     listen 80;
-    server_name 164.90.145.200; # Use your server's IP
+    server_name ecom.apoorvaverma.in;
+
+    location / {
+        include uwsgi_params;
+        uwsgi_pass unix:/root/backend/copywriter-api.sock;
+    }
+
+    # Redirect all HTTP requests to HTTPS
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    server_name ecom.apoorvaverma.in;
+
+    ssl_certificate /etc/letsencrypt/live/ecom.apoorvaverma.in/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/ecom.apoorvaverma.in/privkey.pem;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers HIGH:!aNULL:!MD5;
 
     location / {
         include uwsgi_params;
         uwsgi_pass unix:/root/backend/copywriter-api.sock;
     }
 }
-```
 
 Enable the site and restart Nginx:
 ```bash
@@ -170,4 +190,19 @@ sudo nginx -t
 sudo systemctl restart nginx
 ```
 
-The API is now deployed and accessible at http://164.90.145.200. 
+---
+
+### Step 6: Secure with SSL (Optional)
+
+If you have a domain, use Certbot to add a free SSL certificate.
+
+```bash
+# Install Certbot
+sudo apt install certbot python3-certbot-nginx -y
+
+# Obtain and install certificate
+sudo certbot --nginx -d ecom.apoorvaverma.in
+
+# Test auto-renewal
+sudo certbot renew --dry-run
+```
