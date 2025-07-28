@@ -150,7 +150,7 @@ export default function Home() {
   const [additionalContext, setAdditionalContext] = useState('')
   const [uploadedImage, setUploadedImage] = useState<File | null>(null)
   const [uploadedDocs, setUploadedDocs] = useState<File | null>(null)
-  const [docsUrl, setDocsUrl] = useState('')
+  
   const [previewImage, setPreviewImage] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const [sections, setSections] = useState<Section[]>([])
@@ -361,7 +361,7 @@ export default function Home() {
       return
     }
     
-    if (uploadType === 'docs' && !uploadedDocs && !docsUrl) {
+    if (uploadType === 'docs' && !uploadedDocs) {
       showWarning('Please upload a document')
       return
     }
@@ -419,9 +419,6 @@ export default function Home() {
     if (uploadedDocs) {
       formData.append('document', uploadedDocs)
       formData.append('type', 'file')
-    } else if (docsUrl) {
-      formData.append('url', docsUrl)
-      formData.append('type', 'url')
     }
     
     formData.append('brand_name', brandName)
@@ -1260,34 +1257,14 @@ export default function Home() {
                     {uploadedDocs ? uploadedDocs.name : 'Upload your Google Docs file'}
                   </div>
                   <div className="upload-subtext">
-                    {uploadedDocs ? 'Click to change document' : 'or paste Google Docs URL below'}
+                    {uploadedDocs ? 'Click to change document':'or click to browse and select your file'}
                   </div>
                   
-                  {!uploadedDocs && (
-                    <div style={{ margin: '1.5rem 0', width: '100%' }}>
-                      <input 
-                        type="url" 
-                        value={docsUrl}
-                        onChange={(e) => setDocsUrl(e.target.value)}
-                        placeholder="https://docs.google.com/document/d/..." 
-                        style={{ 
-                          width: '100%', 
-                          padding: '0.75rem', 
-                          border: '2px solid var(--border-light)', 
-                          borderRadius: 'var(--radius-md)', 
-                          fontSize: '0.95rem' 
-                        }}
-                        onClick={(e) => e.stopPropagation()}
-                      />
-                    </div>
-                  )}
                   
-                  {!uploadedDocs && !docsUrl && (
+                  
+                  {!uploadedDocs  && (
                     <div className="upload-features">
-                      <div className="upload-feature">
-                        <i className="fas fa-link"></i>
-                        <span>Google Docs URL</span>
-                      </div>
+                      
                       <div className="upload-feature">
                         <i className="fas fa-file-upload"></i>
                         <span>DOCX Files</span>
